@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus — Tijdbeheer</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23FEF2F2' stroke='%23DC2626' stroke-width='1.5'/><circle cx='16' cy='16' r='9' fill='none' stroke='%23DC2626' stroke-width='1.5' opacity='0.5'/><circle cx='16' cy='16' r='4' fill='%23DC2626'/></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Focus – Onder Constructie</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23f8fafc' stroke='%23e2e8f0' stroke-width='1.5'/%3E%3Cline x1='10' y1='14' x2='16' y2='20' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='14' y2='28' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='24' y2='16' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='24' y1='16' x2='30' y2='12' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='24' y1='16' x2='28' y2='22' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='28' y1='22' x2='26' y2='29' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='20' y2='26' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='20' y1='26' x2='26' y2='29' stroke='%23e2e8f0' stroke-width='1'/%3E%3Ccircle cx='10' cy='14' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='30' cy='12' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='14' cy='28' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='26' cy='29' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='16' cy='20' r='2.5' fill='%2310b981'/%3E%3Ccircle cx='24' cy='16' r='2.5' fill='%2310b981'/%3E%3Ccircle cx='28' cy='22' r='2' fill='%2310b981'/%3E%3Ccircle cx='20' cy='26' r='2' fill='%2310b981'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #FAFAFA;
-            --surface: #FFFFFF;
-            --border: #E5E5E5;
-            --border-hover: #D4D4D4;
-            --text-primary: #171717;
-            --text-secondary: #525252;
-            --text-muted: #A3A3A3;
-            --focus: #DC2626;
-            --focus-light: #FEF2F2;
-            --focus-ring: rgba(220, 38, 38, 0.15);
-            --break: #059669;
-            --break-light: #ECFDF5;
-            --break-ring: rgba(5, 150, 105, 0.15);
-            --long-break: #2563EB;
-            --long-break-light: #EFF6FF;
-            --long-break-ring: rgba(37, 99, 235, 0.15);
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-300: #cbd5e1;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --wit: #ffffff;
+            --accent: #10b981;
+            --accent-light: #d1fae5;
+            --accent-ring: rgba(16, 185, 129, 0.15);
+            --break: #0ea5e9;
+            --break-light: #e0f2fe;
+            --break-ring: rgba(14, 165, 233, 0.15);
+            --long-break: #8b5cf6;
+            --long-break-light: #ede9fe;
+            --long-break-ring: rgba(139, 92, 246, 0.15);
             --radius: 12px;
             --radius-sm: 8px;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-            --shadow: 0 4px 12px rgba(0,0,0,0.06);
             --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -39,8 +41,8 @@
 
         body {
             font-family: 'DM Sans', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
+            background: var(--slate-50);
+            color: var(--slate-700);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -49,53 +51,85 @@
 
         /* Header */
         .header {
-            padding: 1.5rem 2rem;
-            display: flex;
+            padding: 3rem 2rem 4rem;
+            text-align: center;
+            background: var(--wit);
+            border-bottom: 1px solid var(--slate-200);
+            position: relative;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            background: var(--surface);
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--slate-400);
+            text-decoration: none;
+            transition: color 0.2s;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
+        .back-link:hover {
+            color: var(--accent);
         }
 
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-        }
-
-        .logo-text {
-            font-size: 1.125rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
+        .back-link svg {
+            width: 16px;
+            height: 16px;
         }
 
         .settings-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
             width: 40px;
             height: 40px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--slate-200);
             border-radius: var(--radius-sm);
-            background: var(--surface);
+            background: var(--wit);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
+            color: var(--slate-400);
             transition: var(--transition);
         }
 
         .settings-btn:hover {
-            border-color: var(--border-hover);
-            color: var(--text-primary);
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .settings-btn svg {
             width: 20px;
             height: 20px;
+        }
+
+        .logo {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo svg {
+            width: 80px;
+            height: 80px;
+        }
+
+        .site-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-subtitle {
+            font-size: 1.125rem;
+            color: var(--slate-500);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         /* Main */
@@ -105,7 +139,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             gap: 2rem;
         }
 
@@ -114,8 +148,8 @@
             display: flex;
             gap: 0.5rem;
             padding: 0.25rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: var(--wit);
+            border: 1px solid var(--slate-200);
             border-radius: 100px;
         }
 
@@ -127,44 +161,43 @@
             font-family: inherit;
             font-size: 0.875rem;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--slate-500);
             cursor: pointer;
             transition: var(--transition);
         }
 
         .mode-tab:hover {
-            color: var(--text-primary);
+            color: var(--slate-700);
         }
 
         .mode-tab.active {
-            background: var(--text-primary);
-            color: var(--surface);
+            background: var(--slate-800);
+            color: var(--wit);
         }
 
         /* Timer Card */
         .timer-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: var(--wit);
+            border: 1.5px solid var(--slate-200);
             border-radius: 24px;
             padding: 3rem 4rem;
             text-align: center;
-            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
         .timer-card[data-mode="focus"] {
-            border-color: var(--focus);
-            box-shadow: 0 0 0 4px var(--focus-ring), var(--shadow);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-ring);
         }
 
         .timer-card[data-mode="break"] {
             border-color: var(--break);
-            box-shadow: 0 0 0 4px var(--break-ring), var(--shadow);
+            box-shadow: 0 0 0 4px var(--break-ring);
         }
 
         .timer-card[data-mode="long-break"] {
             border-color: var(--long-break);
-            box-shadow: 0 0 0 4px var(--long-break-ring), var(--shadow);
+            box-shadow: 0 0 0 4px var(--long-break-ring);
         }
 
         .timer-label {
@@ -176,18 +209,18 @@
             transition: var(--transition);
         }
 
-        .timer-card[data-mode="focus"] .timer-label { color: var(--focus); }
+        .timer-card[data-mode="focus"] .timer-label { color: var(--accent); }
         .timer-card[data-mode="break"] .timer-label { color: var(--break); }
         .timer-card[data-mode="long-break"] .timer-label { color: var(--long-break); }
 
         .timer-display {
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 6rem;
             font-weight: 500;
             line-height: 1;
             letter-spacing: -0.02em;
             margin-bottom: 2rem;
-            color: var(--text-primary);
+            color: var(--slate-800);
         }
 
         @media (max-width: 480px) {
@@ -226,24 +259,24 @@
         }
 
         .btn-primary {
-            background: var(--text-primary);
-            color: var(--surface);
+            background: var(--accent);
+            color: var(--wit);
         }
 
         .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .btn-secondary {
-            background: var(--bg);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
+            background: var(--slate-100);
+            color: var(--slate-600);
+            border: 1px solid var(--slate-200);
         }
 
         .btn-secondary:hover {
-            border-color: var(--border-hover);
-            color: var(--text-primary);
+            border-color: var(--slate-300);
+            color: var(--slate-700);
         }
 
         /* Progress */
@@ -262,28 +295,82 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: var(--border);
+            background: var(--slate-200);
             transition: var(--transition);
         }
 
         .progress-dot.completed {
-            background: var(--focus);
+            background: var(--accent);
         }
 
         .progress-dot.current {
-            background: var(--surface);
-            border: 2px solid var(--focus);
-            box-shadow: 0 0 0 3px var(--focus-ring);
+            background: var(--wit);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-ring);
         }
 
         .progress-label {
             font-size: 0.8125rem;
-            color: var(--text-muted);
+            color: var(--slate-400);
         }
 
         .progress-count {
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--slate-600);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--slate-200);
+            background: var(--wit);
+        }
+
+        .quote {
+            font-size: 0.8125rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6875rem;
+            color: var(--slate-400);
+            background: var(--slate-100);
+            padding: 0.375rem 0.75rem;
+            border-radius: 100px;
+            transition: all 0.2s;
+        }
+
+        .footer-badge a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .footer-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #f97316;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .footer-badge:hover .dot {
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        .footer-badge:hover a {
+            color: var(--slate-600);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         /* Settings Modal */
@@ -308,7 +395,7 @@
         }
 
         .modal {
-            background: var(--surface);
+            background: var(--wit);
             border-radius: 20px;
             width: 100%;
             max-width: 400px;
@@ -331,25 +418,26 @@
         .modal-title {
             font-size: 1.125rem;
             font-weight: 600;
+            color: var(--slate-800);
         }
 
         .modal-close {
             width: 32px;
             height: 32px;
             border: none;
-            background: var(--bg);
+            background: var(--slate-100);
             border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
+            color: var(--slate-500);
             transition: var(--transition);
         }
 
         .modal-close:hover {
-            background: var(--border);
-            color: var(--text-primary);
+            background: var(--slate-200);
+            color: var(--slate-700);
         }
 
         .modal-close svg {
@@ -375,7 +463,7 @@
             gap: 0.5rem;
             font-size: 0.8125rem;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--slate-600);
             margin-bottom: 0.5rem;
         }
 
@@ -385,7 +473,7 @@
             border-radius: 50%;
         }
 
-        .setting-label .dot.focus { background: var(--focus); }
+        .setting-label .dot.focus { background: var(--accent); }
         .setting-label .dot.break { background: var(--break); }
         .setting-label .dot.long-break { background: var(--long-break); }
 
@@ -398,29 +486,29 @@
         .setting-input {
             flex: 1;
             padding: 0.75rem 1rem;
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--slate-200);
             border-radius: var(--radius-sm);
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1rem;
-            color: var(--text-primary);
-            background: var(--bg);
+            color: var(--slate-800);
+            background: var(--slate-50);
             transition: var(--transition);
         }
 
         .setting-input:focus {
             outline: none;
-            border-color: var(--text-primary);
+            border-color: var(--accent);
         }
 
         .setting-unit {
             font-size: 0.8125rem;
-            color: var(--text-muted);
+            color: var(--slate-400);
             min-width: 50px;
         }
 
         .setting-divider {
             height: 1px;
-            background: var(--border);
+            background: var(--slate-200);
             margin: 1.25rem 0;
         }
 
@@ -432,12 +520,12 @@
 
         .setting-row-label {
             font-size: 0.875rem;
-            color: var(--text-primary);
+            color: var(--slate-700);
         }
 
         .setting-row-desc {
             font-size: 0.75rem;
-            color: var(--text-muted);
+            color: var(--slate-400);
             margin-top: 0.125rem;
         }
 
@@ -457,7 +545,7 @@
         .toggle-slider {
             position: absolute;
             inset: 0;
-            background: var(--border);
+            background: var(--slate-300);
             border-radius: 100px;
             cursor: pointer;
             transition: var(--transition);
@@ -470,14 +558,13 @@
             height: 18px;
             left: 3px;
             top: 3px;
-            background: var(--surface);
+            background: var(--wit);
             border-radius: 50%;
             transition: var(--transition);
-            box-shadow: var(--shadow-sm);
         }
 
         .toggle input:checked + .toggle-slider {
-            background: var(--text-primary);
+            background: var(--accent);
         }
 
         .toggle input:checked + .toggle-slider::before {
@@ -490,21 +577,12 @@
 
         .btn-save {
             width: 100%;
-            background: var(--text-primary);
-            color: var(--surface);
+            background: var(--accent);
+            color: var(--wit);
         }
 
-        /* Footer */
-        .footer {
-            padding: 1.5rem;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            background: var(--surface);
-        }
-
-        .footer-text {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .btn-save:hover {
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         /* Notification Badge */
@@ -513,8 +591,8 @@
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: var(--text-primary);
-            color: var(--surface);
+            background: var(--slate-800);
+            color: var(--wit);
             padding: 1rem 1.5rem;
             border-radius: 100px;
             font-size: 0.875rem;
@@ -529,26 +607,49 @@
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 2rem 1.5rem 3rem;
+            }
+
+            .site-title {
+                font-size: 1.625rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="logo">
-            <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
-                <!-- Concentric circles representing focus -->
-                <circle cx="16" cy="16" r="14" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
-                <circle cx="16" cy="16" r="9" fill="none" stroke="#DC2626" stroke-width="1.5" stroke-opacity="0.5"/>
-                <circle cx="16" cy="16" r="4" fill="#DC2626"/>
+        <a href="https://onderconstructie.github.io/projectmanagement/" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            <span class="logo-text">Focus</span>
-        </div>
+            Projectmanagement
+        </a>
         <button class="settings-btn" id="openSettings" title="Instellingen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
             </svg>
         </button>
+        <div class="logo">
+            <!-- Timer/focus icoon -->
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="36" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+                <!-- Timer cirkel -->
+                <circle cx="40" cy="40" r="24" fill="none" stroke="#cbd5e1" stroke-width="3"/>
+                <!-- Voortgang -->
+                <path d="M40 16 A24 24 0 0 1 64 40" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                <!-- Wijzer -->
+                <line x1="40" y1="40" x2="40" y2="22" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+                <!-- Center -->
+                <circle cx="40" cy="40" r="4" fill="#10b981"/>
+            </svg>
+        </div>
+        <h1 class="site-title">Focus</h1>
+        <p class="site-subtitle">Werk in blokken, neem pauzes, blijf scherp.</p>
     </header>
 
     <!-- Main -->
@@ -597,7 +698,11 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p class="footer-text">Werk in blokken. Neem pauzes. Blijf scherp.</p>
+        <p class="quote">Het is niet dat we weinig tijd hebben, maar dat we er veel verspillen.</p>
+        <div class="footer-badge">
+            <span class="dot"></span>
+            <a href="https://bit.ly/4azfO7S">contact</a>
+        </div>
     </footer>
 
     <!-- Settings Modal -->
@@ -708,7 +813,6 @@
                 settings = { ...settings, ...JSON.parse(saved) };
             }
             updateSettingsUI();
-            updateTimer();
         }
 
         // Save settings to localStorage
@@ -733,39 +837,24 @@
             for (let i = 1; i <= settings.sessionsCount; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'progress-dot';
-                if (i < state.currentSession) {
-                    dot.classList.add('completed');
-                } else if (i === state.currentSession) {
-                    dot.classList.add('current');
-                }
+                if (i < state.currentSession) dot.classList.add('completed');
+                if (i === state.currentSession) dot.classList.add('current');
                 progressDots.appendChild(dot);
             }
         }
 
-        // Format time
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
         // Update timer display
         function updateTimer() {
-            timerDisplay.textContent = formatTime(state.timeLeft);
-            
-            // Update tab title with time and mode indicator
-            const modeIcon = state.mode === 'focus' ? '🔴' : state.mode === 'break' ? '🟢' : '🔵';
-            const modeText = state.mode === 'focus' ? 'Focus' : state.mode === 'break' ? 'Pauze' : 'Lange pauze';
-            document.title = `${formatTime(state.timeLeft)} ${modeIcon} ${modeText}`;
+            const minutes = Math.floor(state.timeLeft / 60);
+            const seconds = state.timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.title = `${timerDisplay.textContent} - Focus`;
         }
 
         // Set mode
         function setMode(mode) {
             state.mode = mode;
-            state.isRunning = false;
-            clearInterval(state.interval);
-
-            // Update time based on mode
+            
             switch (mode) {
                 case 'focus':
                     state.timeLeft = settings.focusTime * 60;
@@ -781,7 +870,6 @@
                     break;
             }
 
-            // Update UI
             timerCard.dataset.mode = mode;
             modeTabs.forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.mode === mode);
@@ -810,7 +898,7 @@
             }
         }
 
-        // Request notification permission on first interaction
+        // Request notification permission
         function requestNotificationPermission() {
             if ('Notification' in window && Notification.permission === 'default') {
                 Notification.requestPermission();
@@ -822,7 +910,6 @@
             if ('Notification' in window && Notification.permission === 'granted') {
                 const notification = new Notification(title, {
                     body: body,
-                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%23FEF2F2" stroke="%23DC2626" stroke-width="1.5"/><circle cx="16" cy="16" r="9" fill="none" stroke="%23DC2626" stroke-width="1.5" opacity="0.5"/><circle cx="16" cy="16" r="4" fill="%23DC2626"/></svg>',
                     tag: 'focus-timer',
                     requireInteraction: true
                 });
@@ -832,14 +919,12 @@
                     notification.close();
                 };
 
-                // Auto-close after 10 seconds
                 setTimeout(() => notification.close(), 10000);
             }
         }
 
         // Start/Pause timer
         function toggleTimer() {
-            // Request notification permission on first interaction
             requestNotificationPermission();
             
             if (state.isRunning) {
@@ -871,21 +956,17 @@
             }
 
             if (state.mode === 'focus') {
-                // Completed a focus session
                 if (state.currentSession >= settings.sessionsCount) {
-                    // Time for long break
                     showNotification('🎉 Alle sessies voltooid! Tijd voor een lange pauze.');
                     sendBrowserNotification('Cyclus voltooid! 🎉', 'Alle sessies afgerond. Tijd voor een lange pauze.');
                     state.currentSession = 1;
                     setMode('long-break');
                 } else {
-                    // Time for short break
                     showNotification('✓ Focussessie voltooid! Neem een korte pauze.');
                     sendBrowserNotification('Focustijd voorbij! ✓', 'Goed gedaan! Neem nu een korte pauze.');
                     setMode('break');
                 }
             } else {
-                // Completed a break
                 if (state.mode === 'break') {
                     state.currentSession++;
                 }
@@ -917,7 +998,6 @@
             oscillator.start(audioContext.currentTime);
             oscillator.stop(audioContext.currentTime + 0.5);
 
-            // Second beep
             setTimeout(() => {
                 const osc2 = audioContext.createOscillator();
                 const gain2 = audioContext.createGain();
