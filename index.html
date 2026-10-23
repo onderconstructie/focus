@@ -27,6 +27,8 @@
             --slate-50: #f8fafc;
             --wit: #ffffff;
             --accent: #10b981;
+            --accent-dark: #047857;
+            --accent-darker: #065f46;
             --accent-light: #d1fae5;
             --accent-ring: rgba(16, 185, 129, 0.15);
             --break: #0ea5e9;
@@ -58,7 +60,7 @@
 
         /* Header */
         .header {
-            padding: 3rem 2rem 4rem;
+            padding: 2.5rem 2rem 2rem;
             text-align: center;
             background: var(--wit);
             border-bottom: 1px solid var(--slate-200);
@@ -72,14 +74,15 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            min-height: 44px;
             font-size: 0.875rem;
-            color: var(--slate-400);
+            color: var(--slate-500);
             text-decoration: none;
             transition: color 0.2s;
         }
 
         .back-link:hover {
-            color: var(--accent);
+            color: var(--accent-dark);
         }
 
         .back-link svg {
@@ -91,8 +94,8 @@
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border: 1px solid var(--slate-200);
             border-radius: var(--radius-sm);
             background: var(--wit);
@@ -100,13 +103,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--slate-400);
+            color: var(--slate-500);
             transition: var(--transition);
         }
 
         .settings-btn:hover {
             border-color: var(--accent);
-            color: var(--accent);
+            color: var(--accent-dark);
         }
 
         .settings-btn svg {
@@ -116,24 +119,25 @@
 
         .logo {
             display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .logo svg {
-            width: 80px;
-            height: 80px;
-        }
-
-        .site-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--slate-800);
-            letter-spacing: -0.03em;
             margin-bottom: 0.5rem;
         }
 
+        .logo svg {
+            width: 56px;
+            height: 56px;
+        }
+
+        .site-title {
+            font-size: 1.625rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+
         .site-subtitle {
-            font-size: 1.125rem;
+            font-size: 0.9375rem;
             color: var(--slate-500);
             max-width: 500px;
             margin: 0 auto;
@@ -153,7 +157,10 @@
         /* Mode Tabs */
         .mode-tabs {
             display: flex;
-            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+            gap: 0.25rem;
             padding: 0.25rem;
             background: var(--wit);
             border: 1px solid var(--slate-200);
@@ -161,7 +168,8 @@
         }
 
         .mode-tab {
-            padding: 0.625rem 1.25rem;
+            min-height: 44px;
+            padding: 0.625rem 1.125rem;
             border: none;
             background: transparent;
             border-radius: 100px;
@@ -190,6 +198,8 @@
             padding: 3rem 4rem;
             text-align: center;
             transition: var(--transition);
+            max-width: 100%;
+            min-width: 0;
         }
 
         .timer-card[data-mode="focus"] {
@@ -216,9 +226,9 @@
             transition: var(--transition);
         }
 
-        .timer-card[data-mode="focus"] .timer-label { color: var(--accent); }
-        .timer-card[data-mode="break"] .timer-label { color: var(--break); }
-        .timer-card[data-mode="long-break"] .timer-label { color: var(--long-break); }
+        .timer-card[data-mode="focus"] .timer-label { color: var(--accent-dark); }
+        .timer-card[data-mode="break"] .timer-label { color: #0369a1; }
+        .timer-card[data-mode="long-break"] .timer-label { color: #6d28d9; }
 
         .timer-display {
             font-family: 'JetBrains Mono', monospace;
@@ -231,16 +241,27 @@
         }
 
         @media (max-width: 480px) {
+            .main {
+                padding: 2rem 1rem;
+            }
             .timer-display {
-                font-size: 4rem;
+                font-size: clamp(3.25rem, 17vw, 4rem);
             }
             .timer-card {
-                padding: 2rem 2.5rem;
+                width: 100%;
+                padding: 2rem 1rem;
+            }
+            .mode-tab {
+                padding: 0.625rem 0.875rem;
+            }
+            .mode-tabs {
+                border-radius: 24px;
             }
         }
 
         .timer-controls {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.75rem;
             justify-content: center;
         }
@@ -250,6 +271,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            min-height: 44px;
             padding: 0.875rem 1.75rem;
             border: none;
             border-radius: 100px;
@@ -266,11 +288,12 @@
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: var(--accent-dark);
             color: var(--wit);
         }
 
         .btn-primary:hover {
+            background: var(--accent-darker);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
@@ -318,7 +341,7 @@
 
         .progress-label {
             font-size: 0.8125rem;
-            color: var(--slate-400);
+            color: var(--slate-500);
         }
 
         .progress-count {
@@ -336,7 +359,7 @@
 
         .quote {
             font-size: 0.8125rem;
-            color: var(--accent);
+            color: var(--accent-dark);
         }
 
         /* Settings Modal */
@@ -388,8 +411,8 @@
         }
 
         .modal-close {
-            width: 32px;
-            height: 32px;
+            width: 44px;
+            height: 44px;
             border: none;
             background: var(--slate-100);
             border-radius: 8px;
@@ -459,16 +482,16 @@
             color: var(--slate-800);
             background: var(--slate-50);
             transition: var(--transition);
+            min-width: 0;
         }
 
         .setting-input:focus {
-            outline: none;
             border-color: var(--accent);
         }
 
         .setting-unit {
             font-size: 0.8125rem;
-            color: var(--slate-400);
+            color: var(--slate-500);
             min-width: 50px;
         }
 
@@ -491,15 +514,18 @@
 
         .setting-row-desc {
             font-size: 0.75rem;
-            color: var(--slate-400);
+            color: var(--slate-500);
             margin-top: 0.125rem;
         }
 
         /* Toggle Switch */
         .toggle {
             position: relative;
+            display: block;
+            flex-shrink: 0;
             width: 44px;
-            height: 24px;
+            height: 44px;
+            cursor: pointer;
         }
 
         .toggle input {
@@ -510,7 +536,10 @@
 
         .toggle-slider {
             position: absolute;
-            inset: 0;
+            left: 0;
+            right: 0;
+            top: 10px;
+            height: 24px;
             background: var(--slate-300);
             border-radius: 100px;
             cursor: pointer;
@@ -530,7 +559,12 @@
         }
 
         .toggle input:checked + .toggle-slider {
-            background: var(--accent);
+            background: var(--accent-dark);
+        }
+
+        .toggle input:focus-visible + .toggle-slider {
+            outline: 2px solid var(--accent-dark);
+            outline-offset: 2px;
         }
 
         .toggle input:checked + .toggle-slider::before {
@@ -543,12 +577,36 @@
 
         .btn-save {
             width: 100%;
-            background: var(--accent);
+            background: var(--accent-dark);
             color: var(--wit);
         }
 
         .btn-save:hover {
+            background: var(--accent-darker);
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-wipe {
+            width: 100%;
+            margin-top: 0.5rem;
+            background: transparent;
+            color: var(--slate-600);
+            font-weight: 500;
+        }
+
+        .btn-wipe:hover {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+        .modal {
+            max-height: calc(100dvh - 2rem);
+            overflow-y: auto;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent-dark);
+            outline-offset: 2px;
         }
 
         /* Notification Badge */
@@ -564,6 +622,9 @@
             font-size: 0.875rem;
             font-weight: 500;
             box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            width: max-content;
+            max-width: calc(100vw - 2rem);
+            text-align: center;
             opacity: 0;
             transition: var(--transition);
             z-index: 50;
@@ -579,8 +640,17 @@
                 padding: 2rem 1.5rem 3rem;
             }
 
-            .site-title {
-                font-size: 1.625rem;
+            .back-link {
+                position: static;
+                display: flex;
+                justify-content: center;
+                width: fit-content;
+                margin: -1.5rem auto 0.75rem;
+            }
+
+            .settings-btn {
+                top: 1.5rem;
+                right: 1rem;
             }
         }
     
@@ -591,13 +661,13 @@
             margin-top: 2rem;
             border-top: 1px solid #e2e8f0;
             background: #ffffff;
-            color: #10b981;
+            color: #047857;
         }
 
         footer.oc-footer .oc-quote {
             font-size: 0.8125rem;
             line-height: 1.5;
-            color: #10b981;
+            color: #047857;
             opacity: 1;
             font-style: normal;
             margin: 0;
@@ -607,13 +677,13 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <a href="https://onderconstructie.github.io/zakmes/" class="back-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <a href="https://onderconstructie.github.io/zakmes/" class="back-link" aria-label="Terug naar Zakmes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
             Zakmes
         </a>
-        <button class="settings-btn" id="openSettings" title="Instellingen">
+        <button class="settings-btn" id="openSettings" title="Instellingen" aria-label="Instellingen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
@@ -621,7 +691,7 @@
         </button>
         <div class="logo">
             <!-- Timer/focus icoon -->
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle cx="40" cy="40" r="36" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
                 <!-- Timer cirkel -->
                 <circle cx="40" cy="40" r="24" fill="none" stroke="#cbd5e1" stroke-width="3"/>
@@ -640,16 +710,16 @@
     <!-- Main -->
     <main class="main">
         <!-- Mode Tabs -->
-        <div class="mode-tabs">
-            <button class="mode-tab active" data-mode="focus">Focus</button>
-            <button class="mode-tab" data-mode="break">Pauze</button>
-            <button class="mode-tab" data-mode="long-break">Lange pauze</button>
+        <div class="mode-tabs" role="group" aria-label="Soort blok">
+            <button class="mode-tab active" data-mode="focus" aria-pressed="true">Focus</button>
+            <button class="mode-tab" data-mode="break" aria-pressed="false">Pauze</button>
+            <button class="mode-tab" data-mode="long-break" aria-pressed="false">Lange pauze</button>
         </div>
 
         <!-- Timer Card -->
         <div class="timer-card" data-mode="focus" id="timerCard">
             <p class="timer-label" id="timerLabel">Focustijd</p>
-            <p class="timer-display" id="timerDisplay">25:00</p>
+            <p class="timer-display" id="timerDisplay" role="timer" aria-live="off">25:00</p>
             <div class="timer-controls">
                 <button class="btn btn-primary" id="startBtn">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -688,10 +758,10 @@
 
     <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModal">
-        <div class="modal">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
             <div class="modal-header">
-                <h2 class="modal-title">Instellingen</h2>
-                <button class="modal-close" id="closeSettings">
+                <h2 class="modal-title" id="settingsTitle">Instellingen</h2>
+                <button class="modal-close" id="closeSettings" aria-label="Sluiten">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                         <path d="M18 6L6 18M6 6l12 12"/>
                     </svg>
@@ -699,7 +769,7 @@
             </div>
             <div class="modal-body">
                 <div class="setting-group">
-                    <label class="setting-label">
+                    <label class="setting-label" for="focusTime">
                         <span class="dot focus"></span>
                         Focustijd
                     </label>
@@ -709,7 +779,7 @@
                     </div>
                 </div>
                 <div class="setting-group">
-                    <label class="setting-label">
+                    <label class="setting-label" for="breakTime">
                         <span class="dot break"></span>
                         Korte pauze
                     </label>
@@ -719,7 +789,7 @@
                     </div>
                 </div>
                 <div class="setting-group">
-                    <label class="setting-label">
+                    <label class="setting-label" for="longBreakTime">
                         <span class="dot long-break"></span>
                         Lange pauze
                     </label>
@@ -729,7 +799,7 @@
                     </div>
                 </div>
                 <div class="setting-group">
-                    <label class="setting-label">Sessies voor lange pauze</label>
+                    <label class="setting-label" for="sessionsCount">Sessies voor lange pauze</label>
                     <div class="setting-input-row">
                         <input type="number" class="setting-input" id="sessionsCount" value="4" min="2" max="10">
                         <span class="setting-unit">sessies</span>
@@ -738,33 +808,35 @@
                 <div class="setting-divider"></div>
                 <div class="setting-row">
                     <div>
-                        <p class="setting-row-label">Geluidssignaal</p>
+                        <p class="setting-row-label" id="soundLabel">Geluidssignaal</p>
                         <p class="setting-row-desc">Speel een geluid aan het einde</p>
                     </div>
                     <label class="toggle">
-                        <input type="checkbox" id="soundEnabled" checked>
+                        <input type="checkbox" id="soundEnabled" checked aria-labelledby="soundLabel">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-save" id="saveSettings">Opslaan</button>
+                <button class="btn btn-wipe" id="wipeSettings">Instellingen terugzetten</button>
             </div>
         </div>
     </div>
 
     <!-- Notification -->
-    <div class="notification" id="notification"></div>
+    <div class="notification" id="notification" role="status" aria-live="polite"></div>
 
     <script>
         // State
-        let settings = {
+        const DEFAULTS = {
             focusTime: 25,
             breakTime: 5,
             longBreakTime: 15,
             sessionsCount: 4,
             soundEnabled: true
         };
+        let settings = { ...DEFAULTS };
 
         let state = {
             mode: 'focus',
@@ -788,17 +860,28 @@
         const notification = document.getElementById('notification');
 
         // Load settings from localStorage
+        // Kapotte of geblokkeerde opslag mag de timer nooit tegenhouden: dan gewoon de standaardwaarden.
+        const clampInt = (v, min, max, d) => { const n = parseInt(v, 10); return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : d; };
+        function cleanSettings(o) {
+            o = (o && typeof o === 'object') ? o : {};
+            return {
+                focusTime: clampInt(o.focusTime, 1, 120, DEFAULTS.focusTime),
+                breakTime: clampInt(o.breakTime, 1, 30, DEFAULTS.breakTime),
+                longBreakTime: clampInt(o.longBreakTime, 1, 60, DEFAULTS.longBreakTime),
+                sessionsCount: clampInt(o.sessionsCount, 2, 10, DEFAULTS.sessionsCount),
+                soundEnabled: typeof o.soundEnabled === 'boolean' ? o.soundEnabled : DEFAULTS.soundEnabled
+            };
+        }
         function loadSettings() {
-            const saved = localStorage.getItem('focusSettings');
-            if (saved) {
-                settings = { ...settings, ...JSON.parse(saved) };
-            }
+            let saved = null;
+            try { saved = JSON.parse(localStorage.getItem('focusSettings') || 'null'); } catch (e) { saved = null; }
+            settings = cleanSettings(saved);
             updateSettingsUI();
         }
 
         // Save settings to localStorage
         function saveSettings() {
-            localStorage.setItem('focusSettings', JSON.stringify(settings));
+            try { localStorage.setItem('focusSettings', JSON.stringify(settings)); } catch (e) {}
         }
 
         // Update settings UI
@@ -854,6 +937,7 @@
             timerCard.dataset.mode = mode;
             modeTabs.forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.mode === mode);
+                tab.setAttribute('aria-pressed', tab.dataset.mode === mode);
             });
             updateTimer();
             updateStartButton();
@@ -963,6 +1047,9 @@
 
         // Play notification sound
         function playSound() {
+            try { playTones(); } catch (e) {}
+        }
+        function playTones() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
@@ -1037,11 +1124,15 @@
         });
 
         document.getElementById('saveSettings').addEventListener('click', () => {
-            settings.focusTime = parseInt(document.getElementById('focusTime').value) || 25;
-            settings.breakTime = parseInt(document.getElementById('breakTime').value) || 5;
-            settings.longBreakTime = parseInt(document.getElementById('longBreakTime').value) || 15;
-            settings.sessionsCount = parseInt(document.getElementById('sessionsCount').value) || 4;
-            settings.soundEnabled = document.getElementById('soundEnabled').checked;
+            settings = cleanSettings({
+                focusTime: document.getElementById('focusTime').value,
+                breakTime: document.getElementById('breakTime').value,
+                longBreakTime: document.getElementById('longBreakTime').value,
+                sessionsCount: document.getElementById('sessionsCount').value,
+                soundEnabled: document.getElementById('soundEnabled').checked
+            });
+            if (state.currentSession > settings.sessionsCount) state.currentSession = 1;
+            sessionCount.textContent = state.currentSession;
 
             saveSettings();
             updateSettingsUI();
@@ -1054,9 +1145,28 @@
             showNotification('✓ Instellingen opgeslagen');
         });
 
+        // Alles wissen: de eigen sleutel weg en terug naar de standaardwaarden
+        document.getElementById('wipeSettings').addEventListener('click', () => {
+            try { localStorage.removeItem('focusSettings'); } catch (e) {}
+            clearInterval(state.interval);
+            state.isRunning = false;
+            settings = { ...DEFAULTS };
+            state.currentSession = 1;
+            sessionCount.textContent = 1;
+            updateSettingsUI();
+            setMode('focus');
+            settingsModal.classList.remove('active');
+            showNotification('Instellingen teruggezet');
+        });
+
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT') return;
+            if (e.key === 'Escape' && settingsModal.classList.contains('active')) {
+                settingsModal.classList.remove('active');
+                return;
+            }
+            if (e.target.tagName === 'INPUT' || settingsModal.classList.contains('active')) return;
+            if (e.code === 'Space' && e.target.closest && e.target.closest('button, a')) return;
             
             if (e.code === 'Space') {
                 e.preventDefault();
