@@ -11,7 +11,7 @@
     <meta name="oc:kort" content="Geconcentreerd werken in blokken, met pauzes">
     <meta name="oc:volgorde" content="120">
     <meta name="oc:opslag" content="focusSettings">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox=&quot;0 0 40 40&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E %3Ccircle cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;16&quot; fill=&quot;%23f8fafc&quot; stroke=&quot;%23e2e8f0&quot; stroke-width=&quot;2&quot;/%3E %3Ccircle cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;10&quot; stroke=&quot;%23cbd5e1&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/%3E %3Cline x1=&quot;20&quot; y1=&quot;20&quot; x2=&quot;20&quot; y2=&quot;13&quot; stroke=&quot;%2310b981&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/%3E %3Ccircle cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;1.5&quot; fill=&quot;%2310b981&quot;/%3E %3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox=&quot;0 0 40 40&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Ccircle cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;18&quot; fill=&quot;%23f8fafc&quot; stroke=&quot;%23e2e8f0&quot; stroke-width=&quot;1.5&quot;/%3E%3Crect x=&quot;17.5&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;3&quot; rx=&quot;1.2&quot; fill=&quot;%2394a3b8&quot;/%3E%3Cline x1=&quot;20&quot; y1=&quot;10&quot; x2=&quot;20&quot; y2=&quot;12&quot; stroke=&quot;%2394a3b8&quot; stroke-width=&quot;2&quot;/%3E%3Ccircle cx=&quot;20&quot; cy=&quot;22&quot; r=&quot;9.5&quot; stroke=&quot;%23cbd5e1&quot; stroke-width=&quot;3&quot;/%3E%3Cpath d=&quot;M20 12.5 A9.5 9.5 0 0 1 29.03 25&quot; stroke=&quot;%2310b981&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot;/%3E%3Cpath d=&quot;M20 22 L20 12.5 A9.5 9.5 0 0 1 29.03 25 Z&quot; fill=&quot;%2310b981&quot; opacity=&quot;.18&quot;/%3E%3Ccircle cx=&quot;20&quot; cy=&quot;22&quot; r=&quot;1.8&quot; fill=&quot;%23047857&quot;/%3E%3C/svg%3E">
     <link rel="stylesheet" href="/fonts/fonts.css">
     <style>
         :root {
@@ -31,12 +31,12 @@
             --accent-darker: #065f46;
             --accent-light: #d1fae5;
             --accent-ring: rgba(16, 185, 129, 0.15);
-            --break: #0ea5e9;
-            --break-light: #e0f2fe;
-            --break-ring: rgba(14, 165, 233, 0.15);
-            --long-break: #8b5cf6;
-            --long-break-light: #ede9fe;
-            --long-break-ring: rgba(139, 92, 246, 0.15);
+            --break: #10b981;
+            --break-light: #d1fae5;
+            --break-ring: rgba(16, 185, 129, 0.15);
+            --long-break: #047857;
+            --long-break-light: #d1fae5;
+            --long-break-ring: rgba(4, 120, 87, 0.15);
             --radius: 12px;
             --radius-sm: 8px;
             --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -227,11 +227,12 @@
         }
 
         .timer-card[data-mode="focus"] .timer-label { color: var(--accent-dark); }
-        .timer-card[data-mode="break"] .timer-label { color: #0369a1; }
-        .timer-card[data-mode="long-break"] .timer-label { color: #6d28d9; }
+        .timer-card[data-mode="break"] .timer-label { color: #047857; }
+        .timer-card[data-mode="long-break"] .timer-label { color: #065f46; }
 
         .timer-display {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-variant-numeric: tabular-nums;
             font-size: 6rem;
             font-weight: 500;
             line-height: 1;
@@ -477,8 +478,10 @@
             padding: 0.75rem 1rem;
             border: 1.5px solid var(--slate-200);
             border-radius: var(--radius-sm);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: inherit;
+            font-variant-numeric: tabular-nums;
             font-size: 1rem;
+            min-height: 44px;
             color: var(--slate-800);
             background: var(--slate-50);
             transition: var(--transition);
@@ -604,6 +607,8 @@
             overflow-y: auto;
         }
 
+        button, input, select, textarea { font-family: inherit; }
+
         :focus-visible {
             outline: 2px solid var(--accent-dark);
             outline-offset: 2px;
@@ -677,31 +682,20 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <a href="https://onderconstructie.github.io/zakmes/" class="back-link" aria-label="Terug naar Zakmes">
+        <a href="../zakmes/" class="back-link" aria-label="Terug naar Zakmes">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
             Zakmes
         </a>
         <button class="settings-btn" id="openSettings" title="Instellingen" aria-label="Instellingen">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
             </svg>
         </button>
         <div class="logo">
-            <!-- Timer/focus icoon -->
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="40" cy="40" r="36" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
-                <!-- Timer cirkel -->
-                <circle cx="40" cy="40" r="24" fill="none" stroke="#cbd5e1" stroke-width="3"/>
-                <!-- Voortgang -->
-                <path d="M40 16 A24 24 0 0 1 64 40" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-                <!-- Wijzer -->
-                <line x1="40" y1="40" x2="40" y2="22" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
-                <!-- Center -->
-                <circle cx="40" cy="40" r="4" fill="#10b981"/>
-            </svg>
+            <svg aria-hidden="true" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/><rect x="17.5" y="7" width="5" height="3" rx="1.2" fill="#94a3b8"/><line x1="20" y1="10" x2="20" y2="12" stroke="#94a3b8" stroke-width="2"/><circle cx="20" cy="22" r="9.5" stroke="#cbd5e1" stroke-width="3"/><path d="M20 12.5 A9.5 9.5 0 0 1 29.03 25" stroke="#10b981" stroke-width="3" stroke-linecap="round"/><path d="M20 22 L20 12.5 A9.5 9.5 0 0 1 29.03 25 Z" fill="#10b981" opacity=".18"/><circle cx="20" cy="22" r="1.8" fill="#047857"/></svg>
         </div>
         <h1 class="site-title">Focus</h1>
         <p class="site-subtitle">Geconcentreerd werken in blokken, met pauzes</p>
@@ -951,7 +945,7 @@
                         <rect x="6" y="4" width="4" height="16"/>
                         <rect x="14" y="4" width="4" height="16"/>
                     </svg>
-                    Pauze
+                    Even stoppen
                 `;
             } else {
                 startBtn.innerHTML = `
@@ -1022,21 +1016,21 @@
 
             if (state.mode === 'focus') {
                 if (state.currentSession >= settings.sessionsCount) {
-                    showNotification('🎉 Alle sessies voltooid! Tijd voor een lange pauze.');
-                    sendBrowserNotification('Cyclus voltooid! 🎉', 'Alle sessies afgerond. Tijd voor een lange pauze.');
+                    showNotification('Alle sessies voltooid. Tijd voor een lange pauze.');
+                    sendBrowserNotification('Alle sessies voltooid', 'Alle sessies afgerond. Tijd voor een lange pauze.');
                     state.currentSession = 1;
                     setMode('long-break');
                 } else {
-                    showNotification('✓ Focussessie voltooid! Neem een korte pauze.');
-                    sendBrowserNotification('Focustijd voorbij! ✓', 'Goed gedaan! Neem nu een korte pauze.');
+                    showNotification('Focussessie voltooid. Neem een korte pauze.');
+                    sendBrowserNotification('Focustijd voorbij', 'Goed gedaan. Neem nu een korte pauze.');
                     setMode('break');
                 }
             } else {
                 if (state.mode === 'break') {
                     state.currentSession++;
                 }
-                showNotification('⏰ Pauze voorbij! Klaar voor de volgende sessie?');
-                sendBrowserNotification('Pauze voorbij! ⏰', 'Klaar voor de volgende focussessie?');
+                showNotification('Pauze voorbij. Klaar voor de volgende sessie?');
+                sendBrowserNotification('Pauze voorbij', 'Klaar voor de volgende focussessie?');
                 setMode('focus');
             }
 
@@ -1142,7 +1136,7 @@
             }
 
             settingsModal.classList.remove('active');
-            showNotification('✓ Instellingen opgeslagen');
+            showNotification('Instellingen opgeslagen');
         });
 
         // Alles wissen: de eigen sleutel weg en terug naar de standaardwaarden
