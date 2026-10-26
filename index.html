@@ -59,6 +59,7 @@
             background: var(--slate-50);
             color: var(--slate-700);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             -webkit-font-smoothing: antialiased;
@@ -754,6 +755,13 @@
             *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
             .btn-primary:hover { transform: none; }
         }
+
+        /* Soepel op gsm: geen tikvertraging, eigen tikfeedback, grote knoppen in de duimzone */
+        a, button, label, summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+        .btn:active, .mode-tab:active { filter: brightness(0.93); }
+        @media (pointer: coarse) {
+            .timer-controls .btn, .controls .btn { min-height: 56px; font-size: 1.0625rem; }
+        }
     </style>
 </head>
 <body>
@@ -1026,7 +1034,9 @@
         function updateTimer() {
             const minutes = Math.floor(state.timeLeft / 60);
             const seconds = state.timeLeft % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const txt = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (timerDisplay.textContent === txt && state.isRunning) return;   // niets veranderd: niets hertekenen
+            timerDisplay.textContent = txt;
             document.title = state.isRunning || state.timeLeft !== fullTime(state.mode) ? `${timerDisplay.textContent} - Focus` : 'Focus – Onder Constructie';
         }
 
