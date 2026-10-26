@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e293b" media="(prefers-color-scheme: dark)">
     <title>Focus – Onder Constructie</title>
     <meta name="description" content="Werk in blokken, neem pauzes. Een strakke timer om geconcentreerd te werken.">
     <meta name="oc:groep" content="zakmes">
     <meta name="oc:labels" content="concentratie">
     <meta name="oc:kort" content="Geconcentreerd werken in blokken, met pauzes">
     <meta name="oc:volgorde" content="120">
-    <meta name="oc:opslag" content="focusSettings">
+    <meta name="oc:opslag" content="focusSettings, focusRun">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox=&quot;0 0 40 40&quot; fill=&quot;none&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Ccircle cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;18&quot; fill=&quot;%23f8fafc&quot; stroke=&quot;%23e2e8f0&quot; stroke-width=&quot;1.5&quot;/%3E%3Crect x=&quot;17.5&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;3&quot; rx=&quot;1.2&quot; fill=&quot;%2394a3b8&quot;/%3E%3Cline x1=&quot;20&quot; y1=&quot;10&quot; x2=&quot;20&quot; y2=&quot;12&quot; stroke=&quot;%2394a3b8&quot; stroke-width=&quot;2&quot;/%3E%3Ccircle cx=&quot;20&quot; cy=&quot;22&quot; r=&quot;9.5&quot; stroke=&quot;%23cbd5e1&quot; stroke-width=&quot;3&quot;/%3E%3Cpath d=&quot;M20 12.5 A9.5 9.5 0 0 1 29.03 25&quot; stroke=&quot;%2310b981&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot;/%3E%3Cpath d=&quot;M20 22 L20 12.5 A9.5 9.5 0 0 1 29.03 25 Z&quot; fill=&quot;%2310b981&quot; opacity=&quot;.18&quot;/%3E%3Ccircle cx=&quot;20&quot; cy=&quot;22&quot; r=&quot;1.8&quot; fill=&quot;%23047857&quot;/%3E%3C/svg%3E">
     <link rel="stylesheet" href="/fonts/fonts.css">
     <style>
@@ -40,6 +42,10 @@
             --radius: 12px;
             --radius-sm: 8px;
             --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --ink: #047857;
+            --ink-2: #065f46;
+            --ring: #047857;
+            color-scheme: light;
         }
 
         * {
@@ -82,7 +88,7 @@
         }
 
         .back-link:hover {
-            color: var(--accent-dark);
+            color: var(--ink);
         }
 
         .back-link svg {
@@ -109,7 +115,7 @@
 
         .settings-btn:hover {
             border-color: var(--accent);
-            color: var(--accent-dark);
+            color: var(--ink);
         }
 
         .settings-btn svg {
@@ -226,9 +232,9 @@
             transition: var(--transition);
         }
 
-        .timer-card[data-mode="focus"] .timer-label { color: var(--accent-dark); }
-        .timer-card[data-mode="break"] .timer-label { color: #047857; }
-        .timer-card[data-mode="long-break"] .timer-label { color: #065f46; }
+        .timer-card[data-mode="focus"] .timer-label { color: var(--ink); }
+        .timer-card[data-mode="break"] .timer-label { color: var(--ink); }
+        .timer-card[data-mode="long-break"] .timer-label { color: var(--ink-2); }
 
         .timer-display {
             font-family: 'DM Sans', system-ui, sans-serif;
@@ -290,7 +296,7 @@
 
         .btn-primary {
             background: var(--accent-dark);
-            color: var(--wit);
+            color: #ffffff;
         }
 
         .btn-primary:hover {
@@ -360,7 +366,7 @@
 
         .quote {
             font-size: 0.8125rem;
-            color: var(--accent-dark);
+            color: var(--ink);
         }
 
         /* Settings Modal */
@@ -556,7 +562,7 @@
             height: 18px;
             left: 3px;
             top: 3px;
-            background: var(--wit);
+            background: #ffffff;
             border-radius: 50%;
             transition: var(--transition);
         }
@@ -566,7 +572,7 @@
         }
 
         .toggle input:focus-visible + .toggle-slider {
-            outline: 2px solid var(--accent-dark);
+            outline: 2px solid var(--ring);
             outline-offset: 2px;
         }
 
@@ -581,7 +587,7 @@
         .btn-save {
             width: 100%;
             background: var(--accent-dark);
-            color: var(--wit);
+            color: #ffffff;
         }
 
         .btn-save:hover {
@@ -610,7 +616,7 @@
         button, input, select, textarea { font-family: inherit; }
 
         :focus-visible {
-            outline: 2px solid var(--accent-dark);
+            outline: 2px solid var(--ring);
             outline-offset: 2px;
         }
 
@@ -664,18 +670,89 @@
             text-align: center;
             padding: 2rem 1.5rem calc(env(safe-area-inset-bottom, 0px) + 2rem);
             margin-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-            background: #ffffff;
-            color: #047857;
+            border-top: 1px solid var(--slate-200);
+            background: var(--wit);
+            color: var(--ink);
         }
 
         footer.oc-footer .oc-quote {
             font-size: 0.8125rem;
             line-height: 1.5;
-            color: #047857;
+            color: var(--ink);
             opacity: 1;
             font-style: normal;
             margin: 0;
+        }
+    
+        /* Einde van een blok: blijft zichtbaar tot je verder gaat (ook zonder geluid) */
+        .done-msg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.25rem auto 0;
+            max-width: 22rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            background: var(--accent-light);
+            border: 1.5px solid var(--accent);
+            color: var(--ink-2);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            line-height: 1.4;
+            text-align: left;
+        }
+        .done-msg[hidden] { display: none; }
+        .done-msg svg { width: 20px; height: 20px; flex: none; }
+        .timer-card.is-done { box-shadow: 0 0 0 6px var(--accent-ring); }
+
+        /* Donkere modus: rustig donker slate, groen accent */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                color-scheme: dark;
+                --slate-900: #f8fafc;
+                --slate-800: #f1f5f9;
+                --slate-700: #e2e8f0;
+                --slate-600: #cbd5e1;
+                --slate-500: #94a3b8;
+                --slate-400: #94a3b8;
+                --slate-300: #475569;
+                --slate-200: #334155;
+                --slate-100: #273449;
+                --slate-50: #0f172a;
+                --wit: #1e293b;
+                --accent-light: rgba(16, 185, 129, 0.16);
+                --accent-ring: rgba(16, 185, 129, 0.22);
+                --break-ring: rgba(16, 185, 129, 0.22);
+                --long-break-ring: rgba(16, 185, 129, 0.16);
+                --long-break: #10b981;
+                --ink: #a7f3d0;
+                --ink-2: #a7f3d0;
+                --ring: #a7f3d0;
+            }
+            .logo svg circle:first-child { fill: #273449; stroke: #334155; }
+            .modal-overlay { background: rgba(15, 23, 42, 0.75); }
+            .btn-primary:hover, .btn-save:hover { background: #047857; box-shadow: 0 0 0 2px #10b981; }
+            .btn-wipe:hover { color: #fecaca; background: rgba(239, 68, 68, 0.12); }
+        }
+
+        /* Hoog contrast: het gekozen blok krijgt een dikke rand en een vinkje */
+        @media (forced-colors: active) {
+            .mode-tab, .btn { border: 1px solid ButtonText; }
+            .mode-tab[aria-pressed="true"] { border: 3px solid Highlight; }
+            .mode-tab[aria-pressed="true"]::before { content: "\2713  "; }
+            .progress-dot { border: 1px solid CanvasText; }
+            .progress-dot.completed, .progress-dot.current { forced-color-adjust: none; background: Highlight; border-color: Highlight; }
+            .toggle-slider { border: 1px solid CanvasText; }
+            .toggle input:checked + .toggle-slider { forced-color-adjust: none; background: Highlight; }
+            .done-msg { border: 3px solid Highlight; }
+            :focus-visible { outline: 3px solid Highlight; }
+        }
+
+        /* Minder beweging */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+            .btn-primary:hover { transform: none; }
         }
     </style>
 </head>
@@ -726,9 +803,10 @@
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
                         <path d="M3 3v5h5"/>
                     </svg>
-                    Reset
+                    Opnieuw
                 </button>
             </div>
+            <p class="done-msg" id="doneMsg" role="alert" hidden></p>
         </div>
 
         <!-- Progress -->
@@ -837,7 +915,8 @@
             timeLeft: settings.focusTime * 60,
             isRunning: false,
             currentSession: 1,
-            interval: null
+            interval: null,
+            endAt: 0
         };
 
         // Elements
@@ -852,6 +931,48 @@
         const totalSessions = document.getElementById('totalSessions');
         const settingsModal = document.getElementById('settingsModal');
         const notification = document.getElementById('notification');
+        const doneMsg = document.getElementById('doneMsg');
+
+        // ---- Lopende timer bewaren: het eindtijdstip staat in de opslag, zodat de timer na herladen verder telt ----
+        const MODES = ['focus', 'break', 'long-break'];
+        function persistRun() {
+            try {
+                localStorage.setItem('focusRun', JSON.stringify({
+                    v: 1, mode: state.mode, session: state.currentSession,
+                    running: state.isRunning, endAt: state.isRunning ? state.endAt : 0, left: state.timeLeft
+                }));
+            } catch (e) {}
+        }
+        function readRun() {
+            try {
+                const r = JSON.parse(localStorage.getItem('focusRun') || 'null');
+                if (!r || typeof r !== 'object' || !MODES.includes(r.mode)) return null;
+                return r;
+            } catch (e) { return null; }
+        }
+
+        // ---- Scherm wakker houden tijdens een blok ----
+        let wakeLock = null;
+        async function lockWake() {
+            if (!state.isRunning || wakeLock || document.visibilityState !== 'visible') return;
+            try { if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', () => { wakeLock = null; }); } } catch (e) {}
+        }
+        function releaseWake() { try { wakeLock && wakeLock.release(); } catch (e) {} wakeLock = null; }
+
+        // ---- De app laten weten dat er een timer loopt (titel: F = focus, P = pauze) ----
+        let lastBusyMin = null;
+        function fmt(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
+        function postBusy(busy, extra) {
+            try {
+                if (window.parent === window) return;
+                const title = busy ? `${state.mode === 'focus' ? 'F' : 'P'} ${fmt(state.timeLeft)}` : '';
+                window.parent.postMessage(Object.assign({ type: 'oc-busy', busy: !!busy, title }, extra || {}), '*');
+            } catch (e) {}
+        }
+        function busyTick() {
+            const m = Math.ceil(state.timeLeft / 60);
+            if (m !== lastBusyMin) { lastBusyMin = m; postBusy(true); }
+        }
 
         // Load settings from localStorage
         // Kapotte of geblokkeerde opslag mag de timer nooit tegenhouden: dan gewoon de standaardwaarden.
@@ -906,7 +1027,22 @@
             const minutes = Math.floor(state.timeLeft / 60);
             const seconds = state.timeLeft % 60;
             timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            document.title = `${timerDisplay.textContent} - Focus`;
+            document.title = state.isRunning || state.timeLeft !== fullTime(state.mode) ? `${timerDisplay.textContent} - Focus` : 'Focus – Onder Constructie';
+        }
+
+        function fullTime(mode) {
+            return (mode === 'break' ? settings.breakTime : mode === 'long-break' ? settings.longBreakTime : settings.focusTime) * 60;
+        }
+
+        function hideDone() {
+            doneMsg.hidden = true;
+            timerCard.classList.remove('is-done');
+        }
+        function showDone(text) {
+            doneMsg.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span></span>';
+            doneMsg.querySelector('span').textContent = text;
+            doneMsg.hidden = false;
+            timerCard.classList.add('is-done');
         }
 
         // Set mode
@@ -983,24 +1119,41 @@
         }
 
         // Start/Pause timer
+        function runTimer() {
+            state.isRunning = true;
+            clearInterval(state.interval);
+            state.interval = setInterval(tick, 500);
+            lastBusyMin = null;
+            busyTick();
+            lockWake();
+        }
         function toggleTimer() {
             requestNotificationPermission();
             
             if (state.isRunning) {
                 clearInterval(state.interval);
+                state.timeLeft = Math.max(0, Math.ceil((state.endAt - Date.now()) / 1000));
                 state.isRunning = false;
+                releaseWake();
+                postBusy(false);
+                updateTimer();
             } else {
-                state.isRunning = true;
-                state.interval = setInterval(tick, 1000);
+                hideDone();
+                if (state.timeLeft <= 0) state.timeLeft = fullTime(state.mode);
+                state.endAt = Date.now() + state.timeLeft * 1000;
+                runTimer();
             }
+            persistRun();
             updateStartButton();
         }
 
-        // Timer tick
+        // Timer tick: telt af tot het bewaarde eindtijdstip (klopt ook als de pagina even in de achtergrond zat)
         function tick() {
+            if (!state.isRunning) return;
+            state.timeLeft = Math.max(0, Math.ceil((state.endAt - Date.now()) / 1000));
+            updateTimer();
             if (state.timeLeft > 0) {
-                state.timeLeft--;
-                updateTimer();
+                busyTick();
             } else {
                 clearInterval(state.interval);
                 state.isRunning = false;
@@ -1008,20 +1161,26 @@
             }
         }
 
-        // Timer complete
-        function onTimerComplete() {
-            if (settings.soundEnabled) {
+        // Timer complete (late: het blok liep af terwijl de pagina dicht was)
+        function onTimerComplete(late) {
+            if (settings.soundEnabled && !late) {
                 playSound();
             }
+            // Ook zonder geluid: trillen waar het toestel dat kan
+            try { if ('vibrate' in navigator) navigator.vibrate([200, 100, 200, 100, 300]); } catch (e) {}
+            releaseWake();
+            const wasFocus = state.mode === 'focus';
+            const when = late ? ` (om ${new Date(state.endAt).toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit' })})` : '';
+            let msg;
 
             if (state.mode === 'focus') {
                 if (state.currentSession >= settings.sessionsCount) {
-                    showNotification('Alle sessies voltooid. Tijd voor een lange pauze.');
+                    msg = `Focusblok klaar${when}. Alle sessies gedaan: tijd voor een lange pauze.`;
                     sendBrowserNotification('Alle sessies voltooid', 'Alle sessies afgerond. Tijd voor een lange pauze.');
                     state.currentSession = 1;
                     setMode('long-break');
                 } else {
-                    showNotification('Focussessie voltooid. Neem een korte pauze.');
+                    msg = `Focusblok klaar${when}. Neem een korte pauze.`;
                     sendBrowserNotification('Focustijd voorbij', 'Goed gedaan. Neem nu een korte pauze.');
                     setMode('break');
                 }
@@ -1029,11 +1188,15 @@
                 if (state.mode === 'break') {
                     state.currentSession++;
                 }
-                showNotification('Pauze voorbij. Klaar voor de volgende sessie?');
+                msg = `Pauze voorbij${when}. Klaar voor het volgende blok?`;
                 sendBrowserNotification('Pauze voorbij', 'Klaar voor de volgende focussessie?');
                 setMode('focus');
             }
 
+            showDone(msg);
+            document.title = (wasFocus ? 'Blok klaar' : 'Pauze voorbij') + ' - Focus';
+            postBusy(false, { done: true, message: msg });
+            persistRun();
             sessionCount.textContent = state.currentSession;
             updateProgressDots();
             updateStartButton();
@@ -1083,11 +1246,16 @@
             }, 4000);
         }
 
-        // Reset timer
+        // Opnieuw: het huidige blok terug naar het begin
         function resetTimer() {
+            const was = state.isRunning;
             clearInterval(state.interval);
             state.isRunning = false;
+            releaseWake();
+            if (was) postBusy(false);
+            hideDone();
             setMode(state.mode);
+            persistRun();
             updateStartButton();
         }
 
@@ -1098,7 +1266,9 @@
         modeTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 if (!state.isRunning) {
+                    hideDone();
                     setMode(tab.dataset.mode);
+                    persistRun();
                 }
             });
         });
@@ -1134,6 +1304,7 @@
             if (!state.isRunning) {
                 setMode(state.mode);
             }
+            persistRun();
 
             settingsModal.classList.remove('active');
             showNotification('Instellingen opgeslagen');
@@ -1141,9 +1312,13 @@
 
         // Alles wissen: de eigen sleutel weg en terug naar de standaardwaarden
         document.getElementById('wipeSettings').addEventListener('click', () => {
-            try { localStorage.removeItem('focusSettings'); } catch (e) {}
+            try { localStorage.removeItem('focusSettings'); localStorage.removeItem('focusRun'); } catch (e) {}
+            const was = state.isRunning;
             clearInterval(state.interval);
             state.isRunning = false;
+            releaseWake();
+            if (was) postBusy(false);
+            hideDone();
             settings = { ...DEFAULTS };
             state.currentSession = 1;
             sessionCount.textContent = 1;
@@ -1170,9 +1345,39 @@
             }
         });
 
+        // Terug naar de pagina: meteen bijwerken en het scherm opnieuw wakker houden
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') { tick(); lockWake(); }
+        });
+        addEventListener('pagehide', () => { if (state.isRunning) postBusy(false); });
+
         // Initialize
         loadSettings();
         setMode('focus');
+        (function restoreRun() {
+            const r = readRun();
+            if (!r) return;
+            state.currentSession = clampInt(r.session, 1, settings.sessionsCount, 1);
+            sessionCount.textContent = state.currentSession;
+            setMode(r.mode);
+            if (r.running && Number.isFinite(r.endAt) && r.endAt > 0) {
+                state.endAt = r.endAt;
+                const left = Math.ceil((r.endAt - Date.now()) / 1000);
+                if (left > 0) {
+                    state.timeLeft = Math.min(left, 24 * 3600);
+                    updateTimer();
+                    runTimer();
+                } else {
+                    state.timeLeft = 0;
+                    onTimerComplete(true);
+                }
+            } else if (Number.isFinite(r.left)) {
+                state.timeLeft = clampInt(r.left, 0, fullTime(r.mode), fullTime(r.mode)) || fullTime(r.mode);
+                updateTimer();
+            }
+            updateProgressDots();
+            updateStartButton();
+        })();
     </script>
 </body>
 </html>
