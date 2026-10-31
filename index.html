@@ -769,7 +769,7 @@
 
         <!-- Timer Card -->
         <div class="timer-card" data-mode="focus" id="timerCard">
-            <p class="timer-label" id="timerLabel">Focustijd</p>
+            <p class="timer-label" id="timerLabel">Focusblok</p>
             <p class="timer-display" id="timerDisplay" role="timer" aria-live="off">25:00</p>
             <div class="timer-controls">
                 <button class="btn btn-primary" id="startBtn">
@@ -798,14 +798,14 @@
                 <div class="progress-dot"></div>
             </div>
             <p class="progress-label">
-                Sessie <span class="progress-count" id="sessionCount">1</span> van <span id="totalSessions">4</span>
+                Blok <span class="progress-count" id="sessionCount">1</span> van <span id="totalSessions">4</span>
             </p>
         </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer oc-footer">
-        <p class="quote oc-quote">Het is niet dat we weinig tijd hebben, maar dat we er veel verspillen.</p>
+        <p class="quote oc-quote">Eén ding tegelijk, en daarna even niets.</p>
     </footer>
 
     <!-- Settings Modal -->
@@ -823,7 +823,7 @@
                 <div class="setting-group">
                     <label class="setting-label" for="focusTime">
                         <span class="dot focus"></span>
-                        Focustijd
+                        Focusblok
                     </label>
                     <div class="setting-input-row">
                         <input type="number" class="setting-input" id="focusTime" value="25" min="1" max="120">
@@ -851,10 +851,10 @@
                     </div>
                 </div>
                 <div class="setting-group">
-                    <label class="setting-label" for="sessionsCount">Sessies voor lange pauze</label>
+                    <label class="setting-label" for="sessionsCount">Blokken tot een lange pauze</label>
                     <div class="setting-input-row">
                         <input type="number" class="setting-input" id="sessionsCount" value="4" min="2" max="10">
-                        <span class="setting-unit">sessies</span>
+                        <span class="setting-unit">blokken</span>
                     </div>
                 </div>
                 <div class="setting-divider"></div>
@@ -1034,7 +1034,7 @@
             switch (mode) {
                 case 'focus':
                     state.timeLeft = settings.focusTime * 60;
-                    timerLabel.textContent = 'Focustijd';
+                    timerLabel.textContent = 'Focusblok';
                     break;
                 case 'break':
                     state.timeLeft = settings.breakTime * 60;
@@ -1157,13 +1157,13 @@
 
             if (state.mode === 'focus') {
                 if (state.currentSession >= settings.sessionsCount) {
-                    msg = `Focusblok klaar${when}. Alle sessies gedaan: tijd voor een lange pauze.`;
-                    sendBrowserNotification('Alle sessies voltooid', 'Alle sessies afgerond. Tijd voor een lange pauze.');
+                    msg = `Focusblok klaar${when}. Alle blokken gedaan: tijd voor een lange pauze.`;
+                    sendBrowserNotification('Alle blokken gedaan', 'Tijd voor een lange pauze.');
                     state.currentSession = 1;
                     setMode('long-break');
                 } else {
                     msg = `Focusblok klaar${when}. Neem een korte pauze.`;
-                    sendBrowserNotification('Focustijd voorbij', 'Goed gedaan. Neem nu een korte pauze.');
+                    sendBrowserNotification('Focusblok klaar', 'Neem nu een korte pauze.');
                     setMode('break');
                 }
             } else {
@@ -1171,7 +1171,7 @@
                     state.currentSession++;
                 }
                 msg = `Pauze voorbij${when}. Klaar voor het volgende blok?`;
-                sendBrowserNotification('Pauze voorbij', 'Klaar voor de volgende focussessie?');
+                sendBrowserNotification('Pauze voorbij', 'Klaar voor het volgende blok?');
                 setMode('focus');
             }
 
@@ -1251,22 +1251,35 @@
                     hideDone();
                     setMode(tab.dataset.mode);
                     persistRun();
+                } else if (tab.dataset.mode !== state.mode) {
+                    showNotification('Zet de timer eerst even stil om te wisselen.');
                 }
             });
         });
 
-        document.getElementById('openSettings').addEventListener('click', () => {
+        // Instellingen: focus naar het venster, Tab blijft erin, en bij sluiten terug naar de knop
+        const openSettingsBtn = document.getElementById('openSettings');
+        function openSettingsModal() {
+            updateSettingsUI();
             settingsModal.classList.add('active');
-        });
-
-        document.getElementById('closeSettings').addEventListener('click', () => {
+            setTimeout(() => document.getElementById('focusTime').focus({ preventScroll: true }), 50);
+        }
+        function closeSettingsModal() {
+            if (!settingsModal.classList.contains('active')) return;
             settingsModal.classList.remove('active');
-        });
-
+            openSettingsBtn.focus({ preventScroll: true });
+        }
+        openSettingsBtn.addEventListener('click', openSettingsModal);
+        document.getElementById('closeSettings').addEventListener('click', closeSettingsModal);
         settingsModal.addEventListener('click', (e) => {
-            if (e.target === settingsModal) {
-                settingsModal.classList.remove('active');
-            }
+            if (e.target === settingsModal) closeSettingsModal();
+        });
+        settingsModal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const f = [...settingsModal.querySelectorAll('button, input')].filter(el => !el.disabled);
+            const first = f[0], last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
 
         document.getElementById('saveSettings').addEventListener('click', () => {
@@ -1288,7 +1301,7 @@
             }
             persistRun();
 
-            settingsModal.classList.remove('active');
+            closeSettingsModal();
             showNotification('Instellingen opgeslagen');
         });
 
@@ -1306,14 +1319,14 @@
             sessionCount.textContent = 1;
             updateSettingsUI();
             setMode('focus');
-            settingsModal.classList.remove('active');
+            closeSettingsModal();
             showNotification('Instellingen teruggezet');
         });
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && settingsModal.classList.contains('active')) {
-                settingsModal.classList.remove('active');
+                closeSettingsModal();
                 return;
             }
             if (e.target.tagName === 'INPUT' || settingsModal.classList.contains('active')) return;
