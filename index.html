@@ -192,7 +192,7 @@
         }
 
         .mode-tab.active {
-            background: var(--slate-800);
+            background: #047857;
             color: var(--wit);
         }
 
@@ -1180,13 +1180,14 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
                     state.currentSession = 1;
                     setMode('long-break');
                 } else {
-                    msg = `Focusblok klaar${when}. Neem een korte pauze.`;
+                    msg = `Focusblok klaar${when}. Neem een korte pauze: sta even recht en kijk weg van je scherm.`;
                     sendBrowserNotification('Focusblok klaar', 'Neem nu een korte pauze.');
                     setMode('break');
                 }
             } else {
                 if (state.mode === 'break') {
-                    state.currentSession++;
+                    // Nooit voorbij het laatste blok tellen (ook niet na een pauze die je zelf startte)
+                    state.currentSession = Math.min(state.currentSession + 1, settings.sessionsCount);
                 }
                 msg = `Pauze voorbij${when}. Klaar voor het volgende blok?`;
                 sendBrowserNotification('Pauze voorbij', 'Klaar voor het volgende blok?');
@@ -1323,22 +1324,18 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
             showNotification('Instellingen opgeslagen');
         });
 
-        // Alles wissen: de eigen sleutel weg en terug naar de standaardwaarden
+        // Instellingen terugzetten: de eigen sleutel weg en terug naar de standaardwaarden.
+        // Een lopend blok loopt gewoon verder; de nieuwe tijden gelden vanaf het volgende blok.
         document.getElementById('wipeSettings').addEventListener('click', () => {
-            try { localStorage.removeItem('focusSettings'); localStorage.removeItem('focusRun'); } catch (e) {}
-            const was = state.isRunning;
-            clearInterval(state.interval);
-            state.isRunning = false;
-            releaseWake();
-            if (was) postBusy(false);
-            hideDone();
+            try { localStorage.removeItem('focusSettings'); } catch (e) {}
             settings = { ...DEFAULTS };
-            state.currentSession = 1;
-            sessionCount.textContent = 1;
+            if (state.currentSession > settings.sessionsCount) state.currentSession = 1;
+            sessionCount.textContent = state.currentSession;
             updateSettingsUI();
-            setMode('focus');
+            if (!state.isRunning) { hideDone(); setMode(state.mode); }
+            persistRun();
             closeSettingsModal();
-            showNotification('Instellingen teruggezet');
+            showNotification(state.isRunning ? 'Instellingen teruggezet. Ze gelden vanaf het volgende blok.' : 'Instellingen teruggezet');
         });
 
         // Keyboard shortcuts
