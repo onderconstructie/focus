@@ -752,6 +752,10 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
 
 /* Eenheid: dezelfde melding als in de andere tools (donker, afgerond, onderaan in het midden) */
 .notification { bottom:calc(1.25rem + env(safe-area-inset-bottom, 0px)); padding:0.625rem 1rem; border-radius:12px; box-shadow:0 10px 30px rgba(15,23,42,0.25); font-weight:400; line-height:1.4; }
+
+/* Gebruikerstest november 2026: knop in de melding (Ongedaan maken) */
+.notification .note-act { background: none; border: 0; color: #a7f3d0; font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 0.625rem 0.25rem; margin: -0.625rem 0 -0.625rem 0.25rem; min-height: 44px; }
+.notification:not(.show) { pointer-events: none; }
 </style>
 </head>
 <body>
@@ -1239,17 +1243,31 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
         }
 
         // Show notification
-        function showNotification(message) {
+        // Melding onderaan, eventueel met één knop (bv. Ongedaan maken)
+        let noteT = null;
+        function showNotification(message, action) {
+            clearTimeout(noteT);
             notification.textContent = message;
+            if (action) {
+                const b = document.createElement('button');
+                b.type = 'button'; b.className = 'note-act'; b.textContent = action.label;
+                b.addEventListener('click', () => { clearTimeout(noteT); notification.classList.remove('show'); b.remove(); action.run(); });
+                notification.append(' ', b);
+            }
             notification.classList.add('show');
-            setTimeout(() => {
+            noteT = setTimeout(() => {
                 notification.classList.remove('show');
-            }, 4000);
+                const b = notification.querySelector('.note-act'); if (b) b.remove();
+            }, action ? 7000 : 4000);
         }
 
         // Opnieuw: het huidige blok terug naar het begin
         function resetTimer() {
             const was = state.isRunning;
+            // Wat er was, om een vergissing te kunnen herstellen
+            const mode = state.mode, endAt = state.endAt;
+            const left = was ? Math.max(0, Math.ceil((state.endAt - Date.now()) / 1000)) : state.timeLeft;
+            const gedaan = fullTime(mode) - left;
             clearInterval(state.interval);
             state.isRunning = false;
             releaseWake();
@@ -1258,6 +1276,13 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
             setMode(state.mode);
             persistRun();
             updateStartButton();
+            // Al minstens een minuut bezig? Dan kan je het terugdraaien
+            if (gedaan >= 60) showNotification('Het blok begint opnieuw.', { label: 'Ongedaan maken', run() {
+                if (state.isRunning || state.mode !== mode) return;
+                if (was && endAt > Date.now()) { state.endAt = endAt; state.timeLeft = Math.ceil((endAt - Date.now()) / 1000); runTimer(); }
+                else state.timeLeft = Math.max(1, left);
+                updateTimer(); persistRun(); updateStartButton();
+            } });
         }
 
         // Event Listeners
@@ -1302,6 +1327,8 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
         });
 
         document.getElementById('saveSettings').addEventListener('click', () => {
+            // Buiten de grenzen? Dan zeggen we wat we ervan maakten, in plaats van stil aan te passen
+            const ruw = ['focusTime', 'breakTime', 'longBreakTime', 'sessionsCount'].map(id => [id, parseInt(document.getElementById(id).value, 10)]);
             settings = cleanSettings({
                 focusTime: document.getElementById('focusTime').value,
                 breakTime: document.getElementById('breakTime').value,
@@ -1321,7 +1348,9 @@ header.header h1 + p, header.header h1 + p.subtitle, .oc-head h1 + p, .oc-head h
             persistRun();
 
             closeSettingsModal();
-            showNotification('Instellingen opgeslagen');
+            const namen = { focusTime: ['Focusblok', 'minuten'], breakTime: ['Korte pauze', 'minuten'], longBreakTime: ['Lange pauze', 'minuten'], sessionsCount: ['Blokken tot een lange pauze', ''] };
+            const aangepast = ruw.filter(([id, v]) => v !== settings[id]).map(([id]) => `${namen[id][0]}: ${settings[id]}${namen[id][1] ? ' ' + namen[id][1] : ''}`);
+            showNotification(aangepast.length ? `Opgeslagen. Aangepast tot wat kan: ${aangepast.join(', ')}.` : 'Instellingen opgeslagen');
         });
 
         // Instellingen terugzetten: de eigen sleutel weg en terug naar de standaardwaarden.
