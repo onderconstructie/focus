@@ -722,8 +722,8 @@
         /* Hoog contrast: het gekozen blok krijgt een dikke rand en een vinkje */
         @media (forced-colors: active) {
             .mode-tab, .btn { border: 1px solid ButtonText; }
-            .mode-tab[aria-pressed="true"] { border: 3px solid Highlight; }
-            .mode-tab[aria-pressed="true"]::before { content: "\2713  "; }
+            .mode-tab[aria-checked="true"] { border: 3px solid Highlight; }
+            .mode-tab[aria-checked="true"]::before { content: "\2713  "; }
             .progress-dot { border: 1px solid CanvasText; }
             .progress-dot.completed, .progress-dot.current { forced-color-adjust: none; background: Highlight; border-color: Highlight; }
             .toggle-slider { border: 1px solid CanvasText; }
@@ -1486,9 +1486,9 @@ header[data-oc-kop][data-stand="compact"]::before { content:""; order:-1; flex:n
     <main class="main">
         <!-- Mode Tabs -->
         <div class="mode-tabs" role="radiogroup" aria-label="Soort blok">
-            <button type="button" class="mode-tab active" role="radio" data-mode="focus" aria-pressed="true" aria-checked="true">Focus</button>
-            <button type="button" class="mode-tab" role="radio" data-mode="break" aria-pressed="false" aria-checked="false">Pauze</button>
-            <button type="button" class="mode-tab" role="radio" data-mode="long-break" aria-pressed="false" aria-checked="false">Lange pauze</button>
+            <button type="button" class="mode-tab active" role="radio" data-mode="focus" aria-checked="true">Focus</button>
+            <button type="button" class="mode-tab" role="radio" data-mode="break" aria-checked="false">Pauze</button>
+            <button type="button" class="mode-tab" role="radio" data-mode="long-break" aria-checked="false">Lange pauze</button>
         </div>
 
         <!-- Timer Card -->
@@ -1783,7 +1783,7 @@ header[data-oc-kop][data-stand="compact"]::before { content:""; order:-1; flex:n
             timerCard.dataset.mode = mode;
             modeTabs.forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.mode === mode);
-                tab.setAttribute('aria-pressed', tab.dataset.mode === mode); tab.setAttribute('aria-checked', tab.dataset.mode === mode);
+                tab.setAttribute('aria-checked', tab.dataset.mode === mode);
             });
             updateTimer();
             updateStartButton();
